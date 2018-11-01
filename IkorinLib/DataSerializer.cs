@@ -29,15 +29,28 @@ namespace IkorinLib
             ws.IndentChars = "  ";
             var ns = new XmlSerializerNamespaces();
             ns.Add("", "");
+            var tmpfile = Path.Combine(Path.GetDirectoryName(path), "___tmp___file___");
             try {
+                if(File.Exists(path)) {
+                    File.Move(path, tmpfile);
+                }
                 using(var stream = File.Open(path, FileMode.OpenOrCreate))
                 using(var writer = XmlWriter.Create(stream, ws)) {
                     var serializer = new XmlSerializer(typeof(T), typeof(T).GetNestedTypes());
                     serializer.Serialize(writer, data, ns);
+                    if(File.Exists(tmpfile)) {
+                        File.Delete(tmpfile);
+                    }
                     return true;
                 }
             }
             catch(Exception) {
+                if(File.Exists(path)) {
+                    File.Delete(path);
+                }
+                if(File.Exists(tmpfile)) {
+                    File.Move(tmpfile, path);
+                }
                 return false;
             }
         }

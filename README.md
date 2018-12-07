@@ -30,10 +30,10 @@ public class Config : ConfigBase<Config>
 public void Method()
 {
     Config.Path = "myconfig.xml";   // default: "Config.xml"
-    Config.Load();                  // load from xml file
+    Config.Default.Load();          // load from xml file
     
     Config.Default.SampleData = "ねむねむにゃんこ"
-    Config.Save();                  // save to xml file
+    Config.Default.Save();          // save to xml file
 }
 ```
 
@@ -54,4 +54,3 @@ public void Method()
 ### 上記以外
 
 もちろん公開してるAPIはテストはしてるし使えそうな汎用処理いくつか書いた気がしたけど忘れた
-

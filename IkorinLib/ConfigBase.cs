@@ -33,14 +33,14 @@ namespace IkorinLib
 
         /// <summary>Configを保存します</summary>
         /// <returns>保存成功したか</returns>
-        public static bool Save()
+        public bool Save()
         {
             return _serializer.Serialize(_path, Default);
         }
 
         /// <summary>Configを読み込みます</summary>
         /// <returns>読み込み成功したか</returns>
-        public static bool Load()
+        public bool Load()
         {
             T data;
             var result = _serializer.Deserialize(_path, out data);

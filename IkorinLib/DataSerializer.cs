@@ -29,7 +29,9 @@ namespace IkorinLib
             ws.IndentChars = "  ";
             var ns = new XmlSerializerNamespaces();
             ns.Add("", "");
-            var tmpfile = Path.Combine(Path.GetDirectoryName(path), "___tmp___file___");
+            var dir = Path.GetDirectoryName(path);
+            var tmpfile = Path.Combine(dir, "___tmp___file___");
+            Directory.CreateDirectory(dir);
             try {
                 if(File.Exists(path)) {
                     File.Move(path, tmpfile);
